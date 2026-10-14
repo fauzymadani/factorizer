@@ -1,0 +1,11 @@
+factorizer
+*.o
+*.obj
+*.out
+*.exe
+
+*.d
+
+*.dSYM/
+*~
+.cache/
