@@ -1,4 +1,6 @@
+#include <chrono>
 #include <cmath>
+#include <iomanip>
 #include <iostream>
 #include <limits>
 #include <string>
@@ -23,7 +25,12 @@ int main() {
   long long P = getInteger("enter product target (a * c): ");
   long long S = getInteger("enter sum target (b): ");
 
+  auto start = std::chrono::steady_clock::now();
+
+  bool found = false;
+  long long p = 0, q = 0;
   long long D = S * S - 4 * P;
+
   if (D >= 0) {
     long long r = std::llround(std::sqrt(static_cast<double>(D)));
     while (r * r > D)
@@ -32,9 +39,26 @@ int main() {
       ++r;
 
     if (r * r == D && (S - r) % 2 == 0) {
-      std::cout << "Pair: (" << (S - r) / 2 << ", " << (S + r) / 2 << ")\n";
-      return 0;
+      found = true;
+      p = (S - r) / 2;
+      q = (S + r) / 2;
     }
   }
-  std::cout << "no integer pair satisfies the conditions.\n";
+
+  // hence the saying: “Eureka!"
+  auto end = std::chrono::steady_clock::now();
+  std::chrono::duration<double, std::milli> ms = end - start;
+
+  if (found) {
+    std::cout << "\nsolutions found:\n";
+    std::cout << "  (" << p << ", " << q << ")\n";
+    if (p != q)
+      std::cout << "  (" << q << ", " << p << ")\n";
+  } else {
+    std::cout << "\nno integer pair satisfies the conditions.\n";
+  }
+
+  std::cout << std::fixed << std::setprecision(6) << "time: " << ms.count()
+            << " ms\n";
+  return 0;
 }
