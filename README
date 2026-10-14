@@ -1,0 +1,22 @@
+original: https://git.sr.ht/~yzuaf/factorizer
+
+# requirements:
+- g++ with C++17 support
+- make
+
+# build and run 
+
+	make          # build
+	make run      # build and run
+	make clean    # remove build output
+	make rebuild  # clean, then build
+
+example:
+
+	$ ./factorizer
+	Enter product target (a * c): -140
+	Enter sum target (b): -13
+	
+	Solutions found:
+	  (-20, 7)
+	  (7, -20)
